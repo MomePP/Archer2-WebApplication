@@ -32,10 +32,9 @@
           "./vendor/blockly/blocks_compressed.js",
           "./vendor/blockly/en.js",
           "./vendor/blockly/generators/typescript.js",
-          "./vendor/blockly/blocks/angular2/component.js",
-          "./vendor/blockly/blocks/angular2/import.js",
-          "./vendor/blockly/generators/typescript/angular2/component.js",
-          "./vendor/blockly/generators/typescript/angular2/import.js"
+          "./vendor/blockly/generators/python_compressed.js",
+          "./vendor/blockly/generators/python_more.js",
+          "./vendor/blockly/custom_colours.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
