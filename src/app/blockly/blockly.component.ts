@@ -1,18 +1,7 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy
-} from '@angular/core';
-import {
-  Subject,
-  Subscription
-} from 'rxjs/Rx';
-import {
-  EditorService
-} from '../services/editor/editor.service';
-import {
-  IBlocklyEditor
-} from '../models/blockly-editor.model';
+import { Component,OnInit,OnDestroy } from '@angular/core';
+import { Subject,Subscription } from 'rxjs/Rx';
+import { EditorService } from '../services/editor/editor.service';
+import { IBlocklyEditor } from '../models/blockly-editor.model';
 // import { Blockly } from '../../vendor/blockly/blockly_compressed.js';
 
 declare var Blockly: any;
@@ -57,8 +46,8 @@ export class BlocklyComponent implements OnInit, OnDestroy {
     };
     
     this._workspace = Blockly.inject('blocklyDiv', toolbox);
-    this.autosaveblock_interval();
     this.autoloadBlock();
+    this.autosaveblock_interval();
     this._workspace.addChangeListener(e => this.onWorkspaceChange(e));
   }
   
@@ -151,7 +140,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
               this._import += "network"
             }
             break;
-            case 2:
+          case 2:
             if (first) {
               this._import += "import ubinascii,umqtt.simple as MQTTClient"
               first = false;
@@ -187,7 +176,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
               this._machine += "ADC"
             }
             break;
-            case 6:
+          case 6:
             if (first) {
               this._import += "import time"
               first = false;
@@ -197,15 +186,15 @@ export class BlocklyComponent implements OnInit, OnDestroy {
             }
             break;
           case 7:
-          if (first) {
-            this._import += "import httplib"
+            if (first) {
+              this._import += "import httplib"
               first = false;
             } else if (!first) {
               this._import += ","
               this._import += "httplib"
             }
             break;
-            case 8:
+          case 8:
             if (first) {
               this._import += "import json"
               first = false;
@@ -214,7 +203,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
               this._import += "json"
             }
             break;
-            case 9:
+          case 9:
             if (first) {
               this._import += "import oled"
               first = false;
@@ -233,7 +222,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
             }
             this._init_code += "\nbeep = PWM(Pin(2), freq=600, duty=0)\n"
             break;
-            case 11:
+          case 11:
             if (first) {
               this._import += "import math"
               first = false;
@@ -242,7 +231,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
               this._import += "math"
             }
             break;
-            case 12:
+          case 12:
             if (first_sublib) {
               this._machine += "from machine import unique_id"
               first_sublib = false;
@@ -251,7 +240,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
               this._machine += "unique_id"
             }
             break;
-            case 13:
+          case 13:
             if (first) {
               this._import += "import ujson"
               first = false;
@@ -261,12 +250,12 @@ export class BlocklyComponent implements OnInit, OnDestroy {
             }
             break;
           case 14:
-          this._init_code += "\npin1 = Pin(4, Pin.OUT)\npin2 = Pin(15, Pin.OUT)\npin3 = Pin(14, Pin.OUT)\npin4 = Pin(12, Pin.OUT)\n"
-          break;
-          case 15:
-          this._init_code += '\nCLIENT_ID = ubinascii.hexlify(unique_id())\nmqtt = MQTTClient.MQTTClient(CLIENT_ID,"' + this.text_server_name + '",user="' + this.text_mqttuser + '",password="' + this.text_mqttpassword + '")\n'
+            this._init_code += "\npin1 = Pin(4, Pin.OUT)\npin2 = Pin(15, Pin.OUT)\npin3 = Pin(14, Pin.OUT)\npin4 = Pin(12, Pin.OUT)\n"
             break;
-            case 16:
+          case 15:
+            this._init_code += '\nCLIENT_ID = ubinascii.hexlify(unique_id())\nmqtt = MQTTClient.MQTTClient(CLIENT_ID,"' + this.text_server_name + '",user="' + this.text_mqttuser + '",password="' + this.text_mqttpassword + '")\n'
+            break;
+          case 16:
             // console.log('system.js', statements_onmessage_mqtt)
             this._init_code += "\ndef onmessage(topic, " + this.variable_msg_mqtt + "):\n"
             if (this.statements_onmessage_mqtt) {
@@ -280,7 +269,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
               this._init_code += Blockly.Python.INDENT + 'pass\n'
             }
             break;
-            case 17:
+          case 17:
             this._init_code += "\nifstate = {}\n" +
               "def state_has_changed(text, boolean):\n" + Blockly.Python.INDENT +
               "current_state = boolean\n" + Blockly.Python.INDENT +
@@ -303,7 +292,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
       this.autosaveBlock();
     }, 100);
   }
-  
+
   autosaveBlock(): void {
     var xml = Blockly.Xml.workspaceToDom(this._workspace);
     var data = Blockly.Xml.domToText(xml);
@@ -317,7 +306,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
     xml.editable = false;
     xml.deletable = false;
     this._workspace.clear();
-    Blockly.Xml.domToWorkspace(this._workspace, xml);
+    Blockly.Xml.domToWorkspace(xml, this._workspace);
     
     this.generate()
 
@@ -336,7 +325,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
     }
     if (xml.childElementCount == 0) return;
     this._workspace.clear();
-    Blockly.Xml.domToWorkspace(this._workspace, xml);
+    Blockly.Xml.domToWorkspace(xml, this._workspace);
   }
 
   onWorkspaceChange(item): void {
