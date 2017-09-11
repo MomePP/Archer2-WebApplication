@@ -2,7 +2,7 @@ Blockly.Blocks['controls_main'] = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../../../assets/img/block/home-button.png", 30, 30, "*"))
-            .appendField("Main loop");
+            .appendField("Main");
         this.appendStatementInput("a")
             .setCheck(null);
         this.setColour('#607D8B');

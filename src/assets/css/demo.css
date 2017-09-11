@@ -54,6 +54,13 @@
 .places-buttons .btn{
     margin-bottom: 30px
 }
+.sidebar .nav > div.wa-status{
+    position: relative;
+    margin: 0 auto;
+    text-align:center;
+    padding-right: 15px;
+    height: 180px;
+}
 .sidebar .nav > li.active-pro{
     position: absolute;
     width: 100%;
