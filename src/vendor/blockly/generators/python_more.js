@@ -1,7 +1,7 @@
 Blockly.Blocks['controls_main'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/home-button.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/home-button.png", 30, 30, "*"))
             .appendField("Main");
         this.appendStatementInput("a")
             .setCheck(null);
@@ -42,7 +42,7 @@ Blockly.Python['controls_main'] = function (block) {
 Blockly.Blocks['initmqtt_setting'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/mqtt.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/mqtt.png", 30, 30, "*"))
             .appendField("MQTT Setting");
         this.appendDummyInput()
             .appendField("Connect to")
@@ -76,7 +76,7 @@ Blockly.Python['initmqtt_setting'] = function (block) {
 Blockly.Blocks['uniqueid_time_publish'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/mqtt.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/mqtt.png", 30, 30, "*"))
             .appendField("Publish");
         this.appendValueInput("message")
             .setCheck(null);
@@ -112,7 +112,7 @@ Blockly.Python['uniqueid_time_publish'] = function (block) {
 Blockly.Blocks['uniqueid_time_onmsg_subscribe'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/mqtt.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/mqtt.png", 30, 30, "*"))
             .appendField("Subscribe !!(Already loop in block)");
         // this.appendDummyInput()
         //     .appendField("Connect to")
@@ -168,7 +168,7 @@ Blockly.Python['uniqueid_time_onmsg_subscribe'] = function (block) {
 Blockly.Blocks['Pin_I2C_read'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/link-button.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/link-button.png", 30, 30, "*"))
             .appendField("Read I2C from ")
             .appendField(new Blockly.FieldTextInput("address 0x00"), "i2c_addr");
         this.setOutput(true, null);
@@ -186,7 +186,7 @@ Blockly.Python['Pin_I2C_read'] = function (block) {
 Blockly.Blocks['Pin_I2C_write'] = {
     init: function () {
         this.appendValueInput("i2c")
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/link-button.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/link-button.png", 30, 30, "*"))
             .setCheck(["Number", "String", "Array"])
             .appendField("Write I2C");
         this.appendDummyInput()
@@ -210,7 +210,7 @@ Blockly.Python['Pin_I2C_write'] = function (block) {
 Blockly.Blocks['Pin_I2C_scan'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/link-button.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/link-button.png", 30, 30, "*"))
             .appendField("Scan I2C Device(s)");
         this.setOutput(true, null);
         this.setColour('#27ae60');
@@ -227,7 +227,7 @@ Blockly.Python['Pin_I2C_scan'] = function (block) {
 Blockly.Blocks['WLAN_setting'] = {
     init: function () {
         this.appendStatementInput("Wifi_Mode")
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/wifi-signal-waves.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/wifi-signal-waves.png", 30, 30, "*"))
             .setCheck(null)
             .appendField("Set WiFi Mode")
             .appendField(new Blockly.FieldDropdown([
@@ -260,7 +260,7 @@ Blockly.Python['WLAN_setting'] = function (block) {
 Blockly.Blocks['WLAN_connectwifi'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/wifi-signal-waves.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/wifi-signal-waves.png", 30, 30, "*"))
             .appendField("Connect to ")
             .appendField(new Blockly.FieldTextInput("Wifi Name"), "ssid")
             .appendField(" Password")
@@ -283,7 +283,7 @@ Blockly.Python['WLAN_connectwifi'] = function (block) {
 Blockly.Blocks['WLAN_checknetwork'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/wifi-signal-waves.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/wifi-signal-waves.png", 30, 30, "*"))
             .appendField("Check Network Status")
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -301,7 +301,7 @@ var pin_motor = 1;
 Blockly.Blocks['Pin_motor'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
             .appendField("Talk to")
             .appendField(new Blockly.FieldDropdown([
                 ["MotorA", "1"],
@@ -324,7 +324,7 @@ Blockly.Python['Pin_motor'] = function (block) {
 Blockly.Blocks['Pin_motor_turn'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
             .appendField("Turn motor")
             .appendField(new Blockly.FieldDropdown([
                 ["Clockwise", "right"],
@@ -350,7 +350,7 @@ Blockly.Python['Pin_motor_turn'] = function (block) {
 Blockly.Blocks['Pin_motor_onoff'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
             .appendField("Turn motor")
             .appendField(new Blockly.FieldDropdown([
                 ["On", "on"],
@@ -403,7 +403,7 @@ var pin_servo = 0;
 Blockly.Blocks['Pin_PWM_output'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
             .appendField("Talk to")
             .appendField(new Blockly.FieldDropdown([
                 ["Servo1", "1"],
@@ -432,7 +432,7 @@ var sensor_servo = 77;
 Blockly.Blocks['Pin_PWM_servo_heading'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
             .appendField("Set servo heading")
             .appendField(new Blockly.FieldNumber(0, 30, 122), "sensor_value");
         this.setPreviousStatement(true, null);
@@ -456,7 +456,7 @@ Blockly.Python['Pin_PWM_servo_heading'] = function (block) {
 Blockly.Blocks['Pin_PWM_servo_left'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
             .appendField("Servo left turn")
             .appendField(new Blockly.FieldNumber(0, 0, 92), "sensor_value_l");
         this.setPreviousStatement(true, null);
@@ -483,7 +483,7 @@ Blockly.Python['Pin_PWM_servo_left'] = function (block) {
 Blockly.Blocks['Pin_PWM_servo_right'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
             .appendField("Servo right turn")
             .appendField(new Blockly.FieldNumber(0, 0, 92), "sensor_value_r");
         this.setPreviousStatement(true, null);
@@ -509,7 +509,7 @@ Blockly.Python['Pin_PWM_servo_right'] = function (block) {
 Blockly.Blocks['Pin_PWM_servo_stop'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
             .appendField("Turn off servo")
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -530,7 +530,7 @@ Blockly.Python['Pin_PWM_servo_stop'] = function (block) {
 Blockly.Blocks['ADC_input'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/swap-horizontal-orientation-arrows.png", 30, 30, "*"))
             .appendField("Analog sensor")
         this.setOutput(true, null);
         this.setColour('#4FC3F7');
@@ -548,7 +548,7 @@ Blockly.Python['ADC_input'] = function (block) {
 Blockly.Blocks['time_delay'] = {
     init: function () {
         this.appendValueInput("in_value")
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/set-timer-button.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/set-timer-button.png", 30, 30, "*"))
             .setCheck("Number")
             .appendField("Wait");
         this.appendDummyInput()
@@ -583,7 +583,7 @@ var text_ifttt_key = ''
 Blockly.Blocks['httplib_IFTTT_start'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/ifttt.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/ifttt.png", 30, 30, "*"))
             .appendField("Set webhook key :")
             .appendField(new Blockly.FieldTextInput("Key"), "key");
         this.setPreviousStatement(true, null);
@@ -606,7 +606,7 @@ Blockly.Python['httplib_IFTTT_start'] = function (block) {
 Blockly.Blocks['httplib_IFTTT_sent'] = {
     init: function () {
         this.appendValueInput("ifttt_value")
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/ifttt.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/ifttt.png", 30, 30, "*"))
             .setCheck(null)
             .appendField("Send event :")
             .appendField(new Blockly.FieldTextInput("event name"), "event")
@@ -636,7 +636,7 @@ Blockly.Python['httplib_IFTTT_sent'] = function (block) {
 Blockly.Blocks['httplib_netpie_start'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/netpie.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/netpie.png", 30, 30, "*"))
             .appendField("Start")
             .appendField(new Blockly.FieldTextInput("Application"), "app")
             .appendField(", ")
@@ -665,7 +665,7 @@ Blockly.Python['httplib_netpie_start'] = function (block) {
 Blockly.Blocks['httplib_Netpie_put'] = {
     init: function () {
         this.appendValueInput("data_put")
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/netpie.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/netpie.png", 30, 30, "*"))
             .setCheck(null)
             .appendField("Send data")
         this.setPreviousStatement(true, null);
@@ -685,7 +685,7 @@ Blockly.Python['httplib_Netpie_put'] = function (block) {
 Blockly.Blocks['httplib_json_Netpie_get'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/netpie.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/netpie.png", 30, 30, "*"))
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField("Recieve data")
         this.setOutput(true, null);
@@ -705,7 +705,7 @@ var key_datalog = "";
 Blockly.Blocks['httplib_datalog_write_key'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/datalog.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/datalog.png", 30, 30, "*"))
             .appendField("Connect to Channel ")
             .appendField(new Blockly.FieldTextInput("Write Key"), "key");
         this.setPreviousStatement(true, null);
@@ -726,7 +726,7 @@ Blockly.Python['httplib_datalog_write_key'] = function (block) {
 Blockly.Blocks['httplib_datalog_write'] = {
     init: function () {
         this.appendValueInput("logging_write")
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/datalog.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/datalog.png", 30, 30, "*"))
             .appendField("Record")
             .setCheck(null)
         this.appendDummyInput()
@@ -759,7 +759,7 @@ Blockly.Python['httplib_datalog_write'] = function (block) {
 Blockly.Blocks['oled_clear'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/screen-with-rounded-corners.png", 32, 32, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/screen-with-rounded-corners.png", 32, 32, "*"))
             .appendField("Clear Display");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -777,7 +777,7 @@ Blockly.Python['oled_clear'] = function (block) {
 Blockly.Blocks['oled_text'] = {
     init: function () {
         this.appendValueInput("text")
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/screen-with-rounded-corners.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/screen-with-rounded-corners.png", 30, 30, "*"))
             .setCheck(["Number", "String", "Boolean"])
             .appendField("Show Text");
         this.appendDummyInput()
@@ -810,7 +810,7 @@ Blockly.Python['oled_text'] = function (block) {
 Blockly.Blocks['Pin_PWM_beeper_time_beep_wait'] = {
     init: function () {
         this.appendValueInput("time")
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/volume-up-indicator.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/volume-up-indicator.png", 30, 30, "*"))
             .setCheck("Number")
             .appendField("beep for");
         this.appendDummyInput()
@@ -843,7 +843,7 @@ Blockly.Python['Pin_PWM_beeper_time_beep_wait'] = function (block) {
 Blockly.Blocks['Pin_PWM_beeper_time_beep'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/volume-up-indicator.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/volume-up-indicator.png", 30, 30, "*"))
             .appendField("beep");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -861,7 +861,7 @@ Blockly.Python['Pin_PWM_beeper_time_beep'] = function (block) {
 Blockly.Blocks['Pin_PWM_beeper_freq'] = {
     init: function () {
         this.appendValueInput("freq")
-            .appendField(new Blockly.FieldImage("../../../assets/img/block/volume-up-indicator.png", 30, 30, "*"))
+            .appendField(new Blockly.FieldImage("assets/img/block/volume-up-indicator.png", 30, 30, "*"))
             .setCheck("Number")
             .appendField("set beep frequency");
         this.appendDummyInput()
