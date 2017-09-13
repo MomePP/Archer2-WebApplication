@@ -14302,8 +14302,22 @@ Blockly.WorkspaceAudio.prototype.preload = function() {
     for (var a in this.SOUNDS_) {
         var b = this.SOUNDS_[a];
         b.volume = .01;
-        b.play();
-        b.pause();
+        
+        // Show loading animation.
+        var playPromise = b.play();;
+  
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+            // Automatic playback started!
+            // Show playing UI.
+            b.pause();
+            })
+        .catch(error => {
+            // Auto-play was prevented
+            // Show paused UI.
+            });
+        }
+        
         if (goog.userAgent.IPAD || goog.userAgent.IPHONE) break
     }
 };
