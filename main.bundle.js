@@ -275,7 +275,7 @@ var BlocklyComponent = (function () {
     function BlocklyComponent(_editorService) {
         var _this = this;
         this._editorService = _editorService;
-        this.statements_onmessage_mqtt = "";
+        // console.log(statements_onmessage_mqtt);
         this._import = "";
         this._machine = "";
         this._init_code = "";
@@ -306,6 +306,7 @@ var BlocklyComponent = (function () {
         this._init_code = "";
         // Parse the XML into a tree.
         var code = Blockly.Python.workspaceToCode(this._workspace);
+        var variables = Blockly.Variables.allUsedVariables(this._workspace);
         var newcode = code.split('$');
         this.generateXML();
         var execcode = this._import + "\n" + this._machine + "\n";
@@ -313,10 +314,20 @@ var BlocklyComponent = (function () {
         if (this._init_code) {
             execcode += this._init_code;
         }
-        for (var i = 1; i < newcode.length; i += 2) {
-            execcode += newcode[i];
+        for (var j = 0; j < variables.length; j++) {
+            var flag = true;
+            for (var k = 0; k < newcode.length; k++) {
+                if (newcode[k].match(variables[j]) && flag) {
+                    flag = false;
+                    execcode += newcode[k];
+                }
+            }
         }
-        ;
+        for (var i = 0; i < newcode.length; i++) {
+            if (newcode[i].match('def')) {
+                execcode += newcode[i];
+            }
+        }
         // editor.setValue(execcode);
         // console.log(workspace);
         // workspace.createVariable('hello')
@@ -501,18 +512,18 @@ var BlocklyComponent = (function () {
                         this._init_code += "\npin1 = Pin(4, Pin.OUT)\npin2 = Pin(15, Pin.OUT)\npin3 = Pin(14, Pin.OUT)\npin4 = Pin(12, Pin.OUT)\n";
                         break;
                     case 15:
-                        this._init_code += '\nCLIENT_ID = ubinascii.hexlify(unique_id())\nmqtt = MQTTClient.MQTTClient(CLIENT_ID,"' + this.text_server_name + '",user="' + this.text_mqttuser + '",password="' + this.text_mqttpassword + '")\n';
+                        this._init_code += '\nCLIENT_ID = ubinascii.hexlify(unique_id())\nmqtt = MQTTClient.MQTTClient(CLIENT_ID,"' + text_server_name + '",user="' + text_mqttuser + '",password="' + text_mqttpassword + '")\n';
                         break;
                     case 16:
-                        // console.log('system.js', statements_onmessage_mqtt)
-                        this._init_code += "\ndef onmessage(topic, " + this.variable_msg_mqtt + "):\n";
-                        if (this.statements_onmessage_mqtt) {
-                            this._init_code += Blockly.Python.INDENT + this.variable_msg_mqtt + '=' + this.variable_msg_mqtt + '.decode("ascii")\n';
+                        // console.log(this.statements_onmessage_mqtt)
+                        this._init_code += "\ndef onmessage(topic, " + variable_msg_mqtt + "):\n";
+                        if (statements_onmessage_mqtt) {
+                            this._init_code += Blockly.Python.INDENT + variable_msg_mqtt + '=' + variable_msg_mqtt + '.decode("ascii")\n';
                             this._init_code += Blockly.Python.INDENT + 'try:\n';
-                            this._init_code += Blockly.Python.INDENT + Blockly.Python.INDENT + this.variable_msg_mqtt + '=int(' + this.variable_msg_mqtt + ')\n';
+                            this._init_code += Blockly.Python.INDENT + Blockly.Python.INDENT + variable_msg_mqtt + '=int(' + variable_msg_mqtt + ')\n';
                             this._init_code += Blockly.Python.INDENT + 'except ValueError:\n';
                             this._init_code += Blockly.Python.INDENT + Blockly.Python.INDENT + 'pass\n';
-                            this._init_code += this.statements_onmessage_mqtt + "\n";
+                            this._init_code += statements_onmessage_mqtt + "\n";
                         }
                         else {
                             this._init_code += Blockly.Python.INDENT + 'pass\n';
