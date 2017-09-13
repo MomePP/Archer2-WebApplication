@@ -1,3 +1,10 @@
+var variable_msg_mqtt
+var text_server_name
+var check_mqtt_server
+var text_mqttuser
+var text_mqttpassword
+var statements_onmessage_mqtt
+
 Blockly.Blocks['controls_main'] = {
     init: function () {
         this.appendDummyInput()
@@ -34,7 +41,7 @@ Blockly.Python['controls_main'] = function (block) {
     } else if (statements_a.includes('subscribe')) {
         check_mqtt_server = 'subscribe'
     }
-    var code = 'start$\ndef main():\n' + statements_a + '\$end\n';
+    var code = '$\ndef main():\n' + statements_a + '\$\n';
 
     return code;
 };
@@ -1036,3 +1043,10 @@ Blockly.Python['logic_ifstate'] = function (block) {
     var code = 'if state_has_changed("' + value_condition + '", '+ value_condition +'):\n' + statements_if_true + '\n';
     return code;
 };
+
+this.variable_msg_mqtt = variable_msg_mqtt;
+this.text_server_name = text_server_name;
+this.check_mqtt_server = check_mqtt_server;
+this.text_mqttuser = text_mqttuser;
+this.text_mqttpassword = text_mqttpassword;
+this.statements_onmessage_mqtt = statements_onmessage_mqtt;
