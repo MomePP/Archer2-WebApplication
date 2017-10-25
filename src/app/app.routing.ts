@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 
+import { TinkerComponent } from "./tinker/tinker.component";
 import { BlocklyComponent } from './blockly/blockly.component';
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { UserComponent }   from './user/user.component';
@@ -13,8 +14,12 @@ import { UpgradeComponent }   from './upgrade/upgrade.component';
 export const AppRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'blockly',
+        redirectTo: 'tinker',
         pathMatch: 'full',
+    },
+    {
+        path: 'tinker',
+        component: TinkerComponent
     },
     {
         path: 'blockly',

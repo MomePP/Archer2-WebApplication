@@ -11,6 +11,7 @@ import { NavbarModule} from './shared/navbar/navbar.module';
 import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
 import { NguiMapModule} from '@ngui/map';
 
+import { TinkerComponent } from "./tinker/tinker.component";
 import { BlocklyComponent } from './blockly/blockly.component';
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { UserComponent }   from './user/user.component';
@@ -24,6 +25,7 @@ import { UpgradeComponent }   from './upgrade/upgrade.component';
 @NgModule({
   declarations: [
     AppComponent,
+    TinkerComponent,
     BlocklyComponent,
     DashboardComponent,
     UserComponent,

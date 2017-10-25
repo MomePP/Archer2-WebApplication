@@ -10,6 +10,7 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
+    { path: 'tinker', title: 'Tinker',  icon: 'ti-thought', class: '' },
     { path: 'blockly', title: 'Blockly',  icon: 'ti-thought', class: '' },
     { path: 'dashboard', title: 'Dashboard',  icon: 'ti-panel', class: '' },
     { path: 'user', title: 'User Profile',  icon:'ti-user', class: '' },

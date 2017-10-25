@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "./vendor/tinker/tinker.css"
       ],
       "scripts": [
           "../node_modules/jquery/dist/jquery.js",
@@ -28,12 +29,11 @@
           "../node_modules/moment/moment.js",
           "../node_modules/chartist/dist/chartist.js",
           "../node_modules/bootstrap-notify/bootstrap-notify.js",
-          "./vendor/blockly/blockly_compressed.js",
-          "./vendor/blockly/blocks_compressed.js",
-          "./vendor/blockly/en.js",
-          "./vendor/blockly/generators/python_compressed.js",
-          "./vendor/blockly/generators/python_more.js",
-          "./vendor/blockly/custom_colours.js"
+          
+          "./vendor/tinker/blockly_compressed_tinker.js",
+          "./vendor/tinker/blocks_compressed_tinker.js",
+          "./vendor/tinker/gogocode_compressed.js",
+          "./vendor/tinker/en.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
