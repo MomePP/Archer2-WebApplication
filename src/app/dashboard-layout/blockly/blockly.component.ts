@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subject, Subscription } from "rxjs/Rx";
-import { EditorService } from "../services/editor/editor.service";
-import { IBlocklyEditor } from "../models/blockly-editor.model";
+import { EditorService } from "../../services/editor/editor.service";
+import { IBlocklyEditor } from "../../models/blockly-editor.model";
 // import { Blockly } from '../../vendor/blockly/blockly_compressed.js';
 
 declare var Blockly: any;

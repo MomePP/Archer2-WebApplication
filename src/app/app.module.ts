@@ -11,15 +11,17 @@ import { NavbarModule} from './shared/navbar/navbar.module';
 import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
 import { NguiMapModule} from '@ngui/map';
 
-import { BlocklyComponent } from './blockly/blockly.component';
-import { DashboardComponent }   from './dashboard/dashboard.component';
-import { UserComponent }   from './user/user.component';
-import { TableComponent }   from './table/table.component';
-import { TypographyComponent }   from './typography/typography.component';
-import { IconsComponent }   from './icons/icons.component';
-import { MapsComponent }   from './maps/maps.component';
-import { NotificationsComponent }   from './notifications/notifications.component';
-import { UpgradeComponent }   from './upgrade/upgrade.component';
+import { BlocklyComponent } from './dashboard-layout/blockly/blockly.component';
+import { DashboardComponent }   from './dashboard-layout/dashboard/dashboard.component';
+import { UserComponent }   from './dashboard-layout/user/user.component';
+import { TableComponent }   from './dashboard-layout/table/table.component';
+import { TypographyComponent }   from './dashboard-layout/typography/typography.component';
+import { IconsComponent }   from './dashboard-layout/icons/icons.component';
+import { MapsComponent }   from './dashboard-layout/maps/maps.component';
+import { NotificationsComponent }   from './dashboard-layout/notifications/notifications.component';
+import { UpgradeComponent }   from './dashboard-layout/upgrade/upgrade.component';
+import { LoginComponent } from './login/login.component';
+import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { UpgradeComponent }   from './upgrade/upgrade.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UpgradeComponent
+    UpgradeComponent,
+    LoginComponent,
+    DashboardLayoutComponent
   ],
   imports: [
     BrowserModule,
