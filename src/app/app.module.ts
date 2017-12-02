@@ -7,21 +7,36 @@ import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
-import { NavbarModule} from './shared/navbar/navbar.module';
-import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
-import { NguiMapModule} from '@ngui/map';
+import { NavbarModule } from './shared/navbar/navbar.module';
+import { FixedPluginModule } from './shared/fixedplugin/fixedplugin.module';
+import { NguiMapModule } from '@ngui/map';
 
 import { BlocklyComponent } from './dashboard-layout/blockly/blockly.component';
-import { DashboardComponent }   from './dashboard-layout/dashboard/dashboard.component';
-import { UserComponent }   from './dashboard-layout/user/user.component';
-import { TableComponent }   from './dashboard-layout/table/table.component';
-import { TypographyComponent }   from './dashboard-layout/typography/typography.component';
-import { IconsComponent }   from './dashboard-layout/icons/icons.component';
-import { MapsComponent }   from './dashboard-layout/maps/maps.component';
-import { NotificationsComponent }   from './dashboard-layout/notifications/notifications.component';
-import { UpgradeComponent }   from './dashboard-layout/upgrade/upgrade.component';
+import { DashboardComponent } from './dashboard-layout/dashboard/dashboard.component';
+import { UserComponent } from './dashboard-layout/user/user.component';
+import { TableComponent } from './dashboard-layout/table/table.component';
+import { TypographyComponent } from './dashboard-layout/typography/typography.component';
+import { IconsComponent } from './dashboard-layout/icons/icons.component';
+import { MapsComponent } from './dashboard-layout/maps/maps.component';
+import { NotificationsComponent } from './dashboard-layout/notifications/notifications.component';
+import { UpgradeComponent } from './dashboard-layout/upgrade/upgrade.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
+
+import { AngularFireModule } from 'angularfire2';
+
+// New imports to update based on AngularFire2 version 4
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyCZhVPYEP__G7tluetZ1Q5AyS5TMpxYy_I",
+  authDomain: "mome-app.firebaseapp.com",
+  databaseURL: "https://mome-app.firebaseio.com",
+  projectId: "mome-app",
+  storageBucket: "mome-app.appspot.com",
+  messagingSenderId: "639113260297"
+}
 
 @NgModule({
   declarations: [
@@ -45,12 +60,15 @@ import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.co
     NavbarModule,
     FooterModule,
     FixedPluginModule,
-    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBr-tgUtpm8cyjYVQDrjs8YpZH7zBNWPuY'})
+    NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBr-tgUtpm8cyjYVQDrjs8YpZH7zBNWPuY' }),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
 
   ],
   schemas: [
     NO_ERRORS_SCHEMA
-],
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

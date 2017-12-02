@@ -2,7 +2,10 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subject, Subscription } from "rxjs/Rx";
 import { EditorService } from "../../services/editor/editor.service";
 import { IBlocklyEditor } from "../../models/blockly-editor.model";
-// import { Blockly } from '../../vendor/blockly/blockly_compressed.js';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import * as firebase from 'firebase/app';
 
 declare var Blockly: any;
 declare var variable_msg_mqtt: any;
@@ -11,6 +14,8 @@ declare var check_mqtt_server: any;
 declare var text_mqttuser: any;
 declare var text_mqttpassword: any;
 declare var statements_onmessage_mqtt: any;
+
+
 
 @Component({
   selector: "blockly-component",
@@ -26,6 +31,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
 
   // console.log(statements_onmessage_mqtt);
 
+
   _import: string = "";
   _machine: string = "";
   _init_code: string = "";
@@ -34,7 +40,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
   name: string = "";
   generatedCode: string = "// generated code will appear here";
 
-  constructor(private _editorService: EditorService) {
+  constructor(private _editorService: EditorService, public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
     this._openFileSubscription = this._editorService.open.subscribe(name =>
       this.openFile(name)
     );
