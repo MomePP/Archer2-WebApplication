@@ -396,22 +396,51 @@
       </block>
     </category>
   </xml>
-  <div class="row">
-    <div class="col-md-9">
-      <div id="blocklyDiv"></div>
-    </div>
-    <!-- <div class="col-md-1"></div> -->
-    <div class="col-md-3">
-      <!-- <div class="row">
-        <button class="btn btn-danger" (click)="clickedNew()">New</button>
-        <form (submit)="clickedSave()" #saveForm="ngForm">
-          <input type='text' [(ngModel)]="name" placeholder="untitled" ngControl="name" required/>
-          <button class="btn btn-success" type="submit" [disabled]="!saveForm.form.valid">Save</button>
-        </form>
-      </div> -->
+  <!-- <div>
+    
+  </div> -->
+  <div class="row clearfix">
+    <div class="col-md-12">
       <div class="row">
-        <div id="generated">
-          <pre class="full-size" [class.dirty]="dirty">{{generatedCode}}</pre>
+        <div class="col-md-6">
+          <button type="button" onclick="upload()" class="btn" data-toggle="tooltip" data-placement="bottom" title="Share your block(s) to other people">
+            <i class="ti-cloud-up"></i>
+            <b> Share To Cloud </b>
+          </button>
+        </div>
+        <div class="col-md-6 text-right">
+          <button type="button" onclick="upload()" class="btn" data-toggle="tooltip" data-placement="bottom" title="Save your block(s) code to WhiteArrow">
+            <i class="ti-cloud-up"></i>
+            <b> Send To WhiteArrow </b>
+          </button>
+          <button type="button" onclick="run()" class="btn" data-toggle="tooltip" data-placement="bottom" title="Run your block(s) code.">
+            <i class="ti-control-play"></i>
+            <b> Run </b>
+          </button>
+          <button type="button" onclick="stop()" class="btn" data-toggle="tooltip" data-placement="bottom" title="Stop your block(s) code.">
+            <i class="ti-control-stop"></i>
+            <b> Stop </b>
+          </button>
+        </div>
+      </div>
+      <div class="row" style="margin: 10px 0 0 0;">
+        <div class="col-md-9">
+          <div id="blocklyDiv"></div>
+        </div>
+        <!-- <div class="col-md-1"></div> -->
+        <div class="col-md-3">
+          <!-- <div class="row">
+                <button class="btn btn-danger" (click)="clickedNew()">New</button>
+                <form (submit)="clickedSave()" #saveForm="ngForm">
+                  <input type='text' [(ngModel)]="name" placeholder="untitled" ngControl="name" required/>
+                  <button class="btn btn-success" type="submit" [disabled]="!saveForm.form.valid">Save</button>
+                </form>
+              </div> -->
+          <div class="row">
+            <div id="generated">
+              <pre class="full-size" [class.dirty]="dirty">{{generatedCode}}</pre>
+            </div>
+          </div>
         </div>
       </div>
     </div>
