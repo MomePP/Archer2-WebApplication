@@ -38,6 +38,9 @@ export const firebaseConfig = {
   messagingSenderId: "639113260297"
 }
 
+// ngx-bootstrap stuff
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +66,8 @@ export const firebaseConfig = {
     NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBr-tgUtpm8cyjYVQDrjs8YpZH7zBNWPuY' }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ModalModule.forRoot()
 
   ],
   schemas: [
