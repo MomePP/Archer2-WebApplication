@@ -2,7 +2,7 @@ import { Component, TemplateRef, OnInit, OnDestroy } from "@angular/core";
 import { Subject, Subscription } from "rxjs/Rx";
 import { EditorService } from "../../services/editor/editor.service";
 import { IBlocklyEditor } from "../../models/blockly-editor.model";
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseListFactory } from 'angularfire2/database-deprecated';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
@@ -32,7 +32,8 @@ export class BlocklyComponent implements OnInit, OnDestroy {
   private _openFileSubscription: Subscription;
 
   // console.log(statements_onmessage_mqtt);
-  modalRef: BsModalRef;
+  modalExportRef: BsModalRef;
+  modalImportRef: BsModalRef;
 
   _import: string = "";
   _machine: string = "";
@@ -41,15 +42,103 @@ export class BlocklyComponent implements OnInit, OnDestroy {
   dirty: boolean = false;
   name: string = "";
   generatedCode: string = "// generated code will appear here";
+  codeXML: string = "";
+
+  dbAngularFire: AngularFireDatabase;
+  dbUsers: FirebaseListObservable<any[]>;
+  dbUser: FirebaseListObservable<any[]>;
+  dbBlocks: FirebaseListObservable<any[]>;
+  userKey: string;
+  userEmail: string;
+
+  blockName: string = ''
+  blockDescription: string = ''
 
   constructor(private modalService: BsModalService, private _editorService: EditorService, public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
     this._openFileSubscription = this._editorService.open.subscribe(name =>
       this.openFile(name)
     );
+
+    this.dbAngularFire = af;
+    this.dbUsers = af.list('users')
+    this.dbBlocks = af.list('blocks')
+
+    this.userEmail = 'peeranut32@gmail.com'
+
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+  openExportModal(template: TemplateRef<any>) {
+    this.modalExportRef = this.modalService.show(template);
+  }
+
+  exportXML(bname, bdesc) {
+
+    this.dbAngularFire.list('users', {
+      query: {
+        orderByChild: 'email',
+        equalTo: this.userEmail,
+        limitToLast: 1
+      }
+    }).forEach(value => {
+
+      this.dbBlocks.push({
+        bCreator: value[0].fullName,
+        bName: bname,
+        bDescription: bdesc,
+        bCodeXML: this.codeXML
+      }).then(
+        _ => {
+          console.log('success')
+          this.blockName = ''
+          this.blockDescription = ''
+          this.modalExportRef.hide()
+        },
+        err => {
+          console.log(err, 'You do not have access!')
+        })
+    })
+  }
+
+  openImportModal(template: TemplateRef<any>) {
+    this.modalImportRef = this.modalService.show(template);
+  }
+
+  importXML(blockXML) {
+
+    console.log("-- Loading import block(s)");
+
+    var xml = Blockly.Xml.textToDom(
+      '<xml><block type="controls_main" x="229" y="170"></block></xml>'
+    );
+    xml.editable = false;
+    xml.deletable = false;
+    this._workspace.clear();
+    Blockly.Xml.domToWorkspace(xml, this._workspace);
+
+    this.generate();
+
+    var loadedBlock = blockXML
+    // console.log(loadedBlock)
+
+    if (!loadedBlock) return;
+    if (!loadedBlock.split('<block type="controls_main"')[1]) {
+      loadedBlock =
+        loadedBlock.split("</xml>")[0] +
+        '<block type="controls_main" x="229" y="170"></block></xml>';
+    }
+    try {
+      var xml = Blockly.Xml.textToDom(loadedBlock);
+    } catch (e) {
+      return;
+    }
+    if (xml.childElementCount == 0) return;
+    this._workspace.clear();
+    Blockly.Xml.domToWorkspace(xml, this._workspace);
+
+    console.log("import block(s) successful --");
+
+    this.modalImportRef.hide()
+
   }
 
   ngOnInit(): void {
@@ -336,14 +425,14 @@ export class BlocklyComponent implements OnInit, OnDestroy {
     setInterval(() => {
       Blockly.svgResize(this._workspace);
       this.autosaveBlock();
-    }, 100);
+    }, 200);
   }
 
   autosaveBlock(): void {
     var xml = Blockly.Xml.workspaceToDom(this._workspace);
-    var data = Blockly.Xml.domToText(xml);
+    this.codeXML = Blockly.Xml.domToText(xml);
     // Store data in blob.
-    window.localStorage.setItem("autoSaveBlock", data);
+    window.localStorage.setItem("autoSaveBlock", this.codeXML);
   }
 
   autoloadBlock(): void {

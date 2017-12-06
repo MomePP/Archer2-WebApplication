@@ -406,33 +406,58 @@
 
           <ng-template #exportModal>
             <div class="modal-header">
-              <h4 class="modal-title">Modal</h4>
-              <button type="button" class="close" style="margin-top: -30px;" aria-label="Close" (click)="modalRef.hide()">
+              <h4 class="modal-title">Export your block(s) to cloud</h4>
+              <button type="button" class="close" style="margin-top: -30px;" aria-label="Close" (click)="modalExportRef.hide()">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              This is a export.
+              <span class="col-md-ofset-1 row">
+                <div>
+                  <h5>Block name ~!</h5>
+                  <div class="col-md-12 col-md-ofset-2">
+                    <input type="text" [value]="blockName" (input)="blockName = $event.target.value" placeholder="Name your block(s)" name="blockName" class="form-control" required>
+                  </div>
+                </div>
+                <div>
+                  <h5>Description ~!</h5>
+                  <div class="col-md-12 col-md-ofset-2">
+                    <input type="text" [value]="blockDescription" (input)="blockDescription = $event.target.value" placeholder="Add your description" name="blockDescription" class="form-control">
+                  </div>
+                </div>
+                <button class="btn pull-right" (click)="exportXML(blockName, blockDescription)">Export</button>
+              </span>
             </div>
           </ng-template>
 
           <ng-template #importModal>
-              <div class="modal-header">
-                <h4 class="modal-title">Modal</h4>
-                <button type="button" class="close" style="margin-top: -30px;" aria-label="Close" (click)="modalRef.hide()">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="modal-header">
+              <h4 class="modal-title">Import block(s) you want to workspace</h4>
+              <button type="button" class="close" style="margin-top: -30px;" aria-label="Close" (click)="modalImportRef.hide()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div *ngFor="let block of dbBlocks | async">
+                <div *ngIf="block">
+                  <div class="row">
+                    <span class="col-md-8 col-md-offset-2 well well-md">
+                      <h4>{{block.bName}}</h4>
+                      <h6>{{block.bDescription}}</h6>
+                      by {{block.bCreator}}
+                      <button class="btn pull-right" (click)="importXML(block.bCodeXML)">Import</button>
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div class="modal-body">
-                This is a import.
-              </div>
-            </ng-template>
-            
-          <button type="button" (click)="openModal(exportModal)" class="btn" data-toggle="tooltip" data-placement="bottom" title="Share your block(s) to other people">
+            </div>
+          </ng-template>
+
+          <button type="button" (click)="openExportModal(exportModal)" class="btn" data-toggle="tooltip" data-placement="bottom" title="Share your block(s) to other people">
             <i class="ti-cloud-up"></i>
             <b> Export To Cloud </b>
           </button>
-          <button type="button" (click)="openModal(importModal)" class="btn" data-toggle="tooltip" data-placement="bottom" title="Download selected block(s) from other people">
+          <button type="button" (click)="openImportModal(importModal)" class="btn" data-toggle="tooltip" data-placement="bottom" title="Download selected block(s) from other people">
             <i class="ti-cloud-down"></i>
             <b> Import To Workspace </b>
           </button>
