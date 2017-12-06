@@ -1,3 +1,23 @@
-<p>
-  login works!
-</p>
+<div align="center">
+
+<div class="col-md-6 col-md-offset-3">
+  <!-- <div class="col-md-5 col-md-offset-4"> -->
+  
+    <div *ngIf="afAuth.authState | async; let user; else showLogin">
+        <h1>Hello {{ user.displayName }}!</h1>
+        <button (click)="signOut()">Logout</button>
+    </div>
+    <ng-template #showLogin>
+      <img  src="assets/img/WA_logo_Black.png" alt="">
+      <h3>Please login</h3>
+      <input type="email" class="form-control" name="email" placeholder="email@address.com" [(ngModel)]="inputEmail" requred>
+      <input type="password" class="form-control" name="password" placeholder="password" [(ngModel)]="inputPassword" required><br>
+      <button class="btn btn-secondary" (click)="emailLogin(inputEmail,inputPassword)">Login with Email</button>
+      <button class="btn btn-secondary" (click)="googleLogin()">Login with Google</button><br><br>
+      <button class="btn btn-secondary" (click)="signUp()">Signup Email</button>
+
+    </ng-template>
+
+</div>
+
+

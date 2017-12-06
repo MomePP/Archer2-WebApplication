@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
@@ -10,6 +12,9 @@ import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
 import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
 import { NguiMapModule} from '@ngui/map';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { BlocklyComponent } from './dashboard-layout/blockly/blockly.component';
 import { DashboardComponent }   from './dashboard-layout/dashboard/dashboard.component';
@@ -22,6 +27,16 @@ import { NotificationsComponent }   from './dashboard-layout/notifications/notif
 import { UpgradeComponent }   from './dashboard-layout/upgrade/upgrade.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
+import { SignupComponent } from './signup/signup.component';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyBgpWpnKhifv0wFRuVfrk9QsNtoU8o_1Wk",
+  authDomain: "loginwhitearrow.firebaseapp.com",
+  databaseURL: "https://loginwhitearrow.firebaseio.com",
+  projectId: "loginwhitearrow",
+  storageBucket: "loginwhitearrow.appspot.com",
+  messagingSenderId: "60503162759"
+};
 
 @NgModule({
   declarations: [
@@ -36,14 +51,20 @@ import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.co
     NotificationsComponent,
     UpgradeComponent,
     LoginComponent,
-    DashboardLayoutComponent
+    DashboardLayoutComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    HttpModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     RouterModule.forRoot(AppRoutes),
     SidebarModule,
     NavbarModule,
     FooterModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     FixedPluginModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBr-tgUtpm8cyjYVQDrjs8YpZH7zBNWPuY'})
 
@@ -55,3 +76,4 @@ import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.co
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

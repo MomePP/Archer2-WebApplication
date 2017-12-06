@@ -11,6 +11,7 @@ import { NotificationsComponent }   from './dashboard-layout/notifications/notif
 import { UpgradeComponent }   from './dashboard-layout/upgrade/upgrade.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
+import { SignupComponent } from './signup/signup.component';
 
 export const AppRoutes: Routes = [
     {
@@ -21,6 +22,10 @@ export const AppRoutes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'signup',
+        component: SignupComponent
     },
     {
         path: ':user',
