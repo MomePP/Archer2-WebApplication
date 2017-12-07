@@ -14,6 +14,7 @@
       <input type="password" class="form-control" name="password" placeholder="password" [(ngModel)]="inputPassword" required><br>
       <button class="btn btn-secondary" (click)="emailLogin(inputEmail,inputPassword)">Login with Email</button>
       <button class="btn btn-secondary" (click)="signUp()">Signup Email</button><br>
+      <p><a (click)="resetPassword(inputEmail)">Forgot Password</a></p><br>
       <p>Sign-in with <a (click)="googleLogin()">Google</a></p>
 
     </ng-template>

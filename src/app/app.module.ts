@@ -28,6 +28,7 @@ import { UpgradeComponent }   from './dashboard-layout/upgrade/upgrade.component
 import { LoginComponent } from './login/login.component';
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
 import { SignupComponent } from './signup/signup.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBgpWpnKhifv0wFRuVfrk9QsNtoU8o_1Wk",
@@ -52,7 +53,8 @@ export const firebaseConfig = {
     UpgradeComponent,
     LoginComponent,
     DashboardLayoutComponent,
-    SignupComponent
+    SignupComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -75,5 +77,5 @@ export const firebaseConfig = {
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { };
 
