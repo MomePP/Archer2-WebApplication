@@ -396,22 +396,105 @@
       </block>
     </category>
   </xml>
-  <div class="row">
-    <div class="col-md-9">
-      <div id="blocklyDiv"></div>
-    </div>
-    <!-- <div class="col-md-1"></div> -->
-    <div class="col-md-3">
-      <!-- <div class="row">
-        <button class="btn btn-danger" (click)="clickedNew()">New</button>
-        <form (submit)="clickedSave()" #saveForm="ngForm">
-          <input type='text' [(ngModel)]="name" placeholder="untitled" ngControl="name" required/>
-          <button class="btn btn-success" type="submit" [disabled]="!saveForm.form.valid">Save</button>
-        </form>
-      </div> -->
+  <!-- <div>
+    
+  </div> -->
+  <div class="row clearfix">
+    <div class="col-md-12">
       <div class="row">
-        <div id="generated">
-          <pre class="full-size" [class.dirty]="dirty">{{generatedCode}}</pre>
+        <div class="col-md-6">
+
+          <ng-template #exportModal>
+            <div class="modal-header">
+              <h4 class="modal-title">Export your block(s) to cloud</h4>
+              <button type="button" class="close" style="margin-top: -30px;" aria-label="Close" (click)="modalExportRef.hide()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <span class="col-md-ofset-1 row">
+                <div>
+                  <h5>Block name ~!</h5>
+                  <div class="col-md-12 col-md-ofset-2">
+                    <input type="text" [value]="blockName" (input)="blockName = $event.target.value" placeholder="Name your block(s)" name="blockName" class="form-control" required>
+                  </div>
+                </div>
+                <div>
+                  <h5>Description ~!</h5>
+                  <div class="col-md-12 col-md-ofset-2">
+                    <input type="text" [value]="blockDescription" (input)="blockDescription = $event.target.value" placeholder="Add your description" name="blockDescription" class="form-control">
+                  </div>
+                </div>
+                <button class="btn pull-right" (click)="exportXML(blockName, blockDescription)">Export</button>
+              </span>
+            </div>
+          </ng-template>
+
+          <ng-template #importModal>
+            <div class="modal-header">
+              <h4 class="modal-title">Import block(s) you want to workspace</h4>
+              <button type="button" class="close" style="margin-top: -30px;" aria-label="Close" (click)="modalImportRef.hide()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div *ngFor="let block of dbBlocks | async">
+                <div *ngIf="block">
+                  <div class="row">
+                    <span class="col-md-8 col-md-offset-2 well well-md">
+                      <h4>{{block.bName}}</h4>
+                      <h6>{{block.bDescription}}</h6>
+                      by {{block.bCreator}}
+                      <button class="btn pull-right" (click)="importXML(block.bCodeXML)">Import</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+
+          <button type="button" (click)="openExportModal(exportModal)" class="btn" data-toggle="tooltip" data-placement="bottom" title="Share your block(s) to other people">
+            <i class="ti-cloud-up"></i>
+            <b> Export To Cloud </b>
+          </button>
+          <button type="button" (click)="openImportModal(importModal)" class="btn" data-toggle="tooltip" data-placement="bottom" title="Download selected block(s) from other people">
+            <i class="ti-cloud-down"></i>
+            <b> Import To Workspace </b>
+          </button>
+        </div>
+        <div class="col-md-6 text-right">
+          <button type="button" onclick="upload()" class="btn" data-toggle="tooltip" data-placement="bottom" title="Save your block(s) code to WhiteArrow">
+            <i class="ti-files"></i>
+            <b> Send To WhiteArrow </b>
+          </button>
+          <button type="button" onclick="run()" class="btn" data-toggle="tooltip" data-placement="bottom" title="Run your block(s) code.">
+            <i class="ti-control-play"></i>
+            <b> Run </b>
+          </button>
+          <button type="button" onclick="stop()" class="btn" data-toggle="tooltip" data-placement="bottom" title="Stop your block(s) code.">
+            <i class="ti-control-stop"></i>
+            <b> Stop </b>
+          </button>
+        </div>
+      </div>
+      <div class="row" style="margin: 10px 0 0 0;">
+        <div class="col-md-9">
+          <div id="blocklyDiv"></div>
+        </div>
+        <!-- <div class="col-md-1"></div> -->
+        <div class="col-md-3">
+          <!-- <div class="row">
+                <button class="btn btn-danger" (click)="clickedNew()">New</button>
+                <form (submit)="clickedSave()" #saveForm="ngForm">
+                  <input type='text' [(ngModel)]="name" placeholder="untitled" ngControl="name" required/>
+                  <button class="btn btn-success" type="submit" [disabled]="!saveForm.form.valid">Save</button>
+                </form>
+              </div> -->
+          <div class="row">
+            <div id="generated">
+              <pre class="full-size" [class.dirty]="dirty">{{generatedCode}}</pre>
+            </div>
+          </div>
         </div>
       </div>
     </div>
