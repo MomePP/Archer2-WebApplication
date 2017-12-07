@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, TemplateRef, OnInit, HostBinding } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -8,6 +8,9 @@ import { RouterModule } from '@angular/router';
 import * as firebase from 'firebase/app';
 
 import { UserInfoService } from '../user-info.service'
+
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-root',
@@ -25,9 +28,11 @@ export class LoginComponent implements OnInit {
   inputEmail: String;
   inputPassword: String;
   userInfo: object
+  modalResetPwdRef: BsModalRef
 
 
-  constructor(private afAuth: AngularFireAuth,
+  constructor(private modalService: BsModalService,
+    private afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
     private router: Router,
     private userService: UserInfoService) {
@@ -41,6 +46,10 @@ export class LoginComponent implements OnInit {
 
     // this.userService.currentUser.subscribe(user => this.userInfo = user)
     // console.log(this.userInfo);
+  }
+
+  openResetPwdModal(template: TemplateRef<any>){
+    this.modalResetPwdRef = this.modalService.show(template);
   }
 
   Uidpath(): any {

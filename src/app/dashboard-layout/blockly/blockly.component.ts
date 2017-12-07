@@ -17,6 +17,8 @@ declare var text_mqttuser: any;
 declare var text_mqttpassword: any;
 declare var statements_onmessage_mqtt: any;
 
+declare var $: any;
+
 // modal stuff
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -74,6 +76,24 @@ export class BlocklyComponent implements OnInit, OnDestroy {
 
   }
 
+  showNotification(type, message) {
+    var defaultType = ['', 'info', 'success', 'warning', 'danger'];
+
+    var color = Math.floor((Math.random() * 4) + 1);
+
+    $.notify({
+      icon: "ti-gift",
+      message: message
+    }, {
+        type: type,
+        timer: 4000,
+        placement: {
+          from: 'top',
+          align: 'right'
+        }
+      });
+  }
+
   openExportModal(template: TemplateRef<any>) {
     this.modalExportRef = this.modalService.show(template);
   }
@@ -89,7 +109,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
     }).forEach(value => {
 
       this.dbBlocks.push({
-        bCreator: value[0].fullName,
+        bCreator: this.userInfo['email'],
         bName: bname,
         bDescription: bdesc,
         bCodeXML: this.codeXML
@@ -99,6 +119,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
           this.blockName = ''
           this.blockDescription = ''
           this.modalExportRef.hide()
+          this.showNotification('success','export to <b>Cloud</b> - successfully.')
         },
         err => {
           console.log(err, 'You do not have access!')
@@ -145,6 +166,8 @@ export class BlocklyComponent implements OnInit, OnDestroy {
     console.log("import block(s) successful --");
 
     this.modalImportRef.hide()
+    this.showNotification('success','import from <b>Cloud</b> - successfully.')
+    
 
   }
 
@@ -154,7 +177,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
     // console.log(this.userInfo);
     this.userInfo = this.userService.getUserInfo();
     console.log(this.userInfo);
-    
+
 
     let toolbox: any = {
       toolbox: document.getElementById("toolbox")
