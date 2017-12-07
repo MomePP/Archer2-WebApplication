@@ -62,4 +62,7 @@ export class SignupComponent  {
     this.afAuth.auth.signOut();
     this.router.navigate(['/'])
   }
+  backToLogin(){
+    this.router.navigate(['/login']);
+  }
 }

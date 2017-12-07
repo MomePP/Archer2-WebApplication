@@ -12,6 +12,7 @@
           <h3>Sign Up</h3>
           <input type="email" class="form-control" name="email" placeholder="email@address.com" [(ngModel)]="inputEmail" requred>
           <input type="password" class="form-control" name="password" placeholder="password" [(ngModel)]="inputPassword" required><br>
+          <button class="btn btn-secondary" (click)="backToLogin()">Back</button>
           <button class="btn btn-secondary" (click)="emailSignUp(inputEmail,inputPassword)">Confirm</button>
         
     
