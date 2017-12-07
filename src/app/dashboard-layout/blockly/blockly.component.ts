@@ -7,6 +7,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 
+import { UserInfoService } from "../../user-info.service";
+
 declare var Blockly: any;
 declare var variable_msg_mqtt: any;
 declare var text_server_name: any;
@@ -50,11 +52,16 @@ export class BlocklyComponent implements OnInit, OnDestroy {
   dbBlocks: FirebaseListObservable<any[]>;
   userKey: string;
   userEmail: string;
+  userInfo: object;
 
   blockName: string = ''
   blockDescription: string = ''
 
-  constructor(private modalService: BsModalService, private _editorService: EditorService, public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
+  constructor(private modalService: BsModalService,
+    private userService: UserInfoService,
+    private _editorService: EditorService,
+    public afAuth: AngularFireAuth,
+    public af: AngularFireDatabase) {
     this._openFileSubscription = this._editorService.open.subscribe(name =>
       this.openFile(name)
     );
@@ -63,7 +70,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
     this.dbUsers = af.list('users')
     this.dbBlocks = af.list('blocks')
 
-    this.userEmail = 'peeranut32@gmail.com'
+    // this.userEmail = 'peeranut32@gmail.com'
 
   }
 
@@ -76,7 +83,7 @@ export class BlocklyComponent implements OnInit, OnDestroy {
     this.dbAngularFire.list('users', {
       query: {
         orderByChild: 'email',
-        equalTo: this.userEmail,
+        equalTo: this.userEmail, // data from login
         limitToLast: 1
       }
     }).forEach(value => {
@@ -142,6 +149,13 @@ export class BlocklyComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    // this.userService.currentUser.subscribe(user => this.userInfo = user)
+    // console.log(this.userInfo);
+    this.userInfo = this.userService.getUserInfo();
+    console.log(this.userInfo);
+    
+
     let toolbox: any = {
       toolbox: document.getElementById("toolbox")
     };
