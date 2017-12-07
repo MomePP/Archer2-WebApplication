@@ -7,6 +7,8 @@ import { Injectable } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import * as firebase from 'firebase/app';
 
+import { UserInfoService } from '../user-info.service'
+
 @Component({
   selector: 'app-root',
   templateUrl: './login.component.html',
@@ -15,29 +17,33 @@ import * as firebase from 'firebase/app';
 
 //export class LoginComponent {
 @Injectable()
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   authState: any = null;
   Users: Observable<any[]>;
   userid: String;
   inputEmail: String;
   inputPassword: String;
+  userInfo: object
 
 
   constructor(private afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
-    private router: Router) {
+    private router: Router,
+    private userService: UserInfoService) {
 
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth
-      //this.router.navigate(['/'+this.authState.uid]);
     });
-
-    
-
   }
 
-  Uidpath(): any{
+  ngOnInit(): void {
+
+    // this.userService.currentUser.subscribe(user => this.userInfo = user)
+    // console.log(this.userInfo);
+  }
+
+  Uidpath(): any {
     return this.authState.uid
   }
   // Returns true if user is logged in
@@ -75,11 +81,12 @@ export class LoginComponent {
       .then((credential) => {
         this.authState = credential.user
         this.updateUserData()
+        this.router.navigate(['/' + this.authState.uid]);
       })
       .catch(error => console.log(error));
   }
 
-  signUp(){
+  signUp() {
     this.router.navigate(['/signup']);
   }
 
@@ -89,6 +96,7 @@ export class LoginComponent {
       .then((user) => {
         this.authState = user
         this.updateUserData()
+        this.router.navigate(['/' + this.authState.uid]);
       })
       .catch(error => console.log(error));
   }
@@ -98,6 +106,7 @@ export class LoginComponent {
       .then((user) => {
         this.authState = user
         this.updateUserData()
+        this.router.navigate(['/' + this.authState.uid]);
       })
       .catch(error => console.log(error));
   }
@@ -128,6 +137,8 @@ export class LoginComponent {
       email: this.authState.email,
       name: this.authState.displayName
     }
+
+    this.userService.setUserInfo(data);
 
     this.db.object(path).update(data)
       .catch(error => console.log(error));

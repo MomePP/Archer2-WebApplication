@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Router } from "@angular/router";
+import * as firebase from 'firebase/app';
 
 declare var $:any;
 
@@ -29,6 +34,20 @@ export const ROUTES: RouteInfo[] = [
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+
+    authState: any = null;
+    Users: Observable<any[]>;
+
+    constructor(private afAuth: AngularFireAuth,
+        private db: AngularFireDatabase,
+        private router: Router) {
+    
+        this.afAuth.authState.subscribe((auth) => {
+          this.authState = auth
+          this.router.navigate(['/' + this.authState.uid]);
+        });
+      }
+
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
     }
@@ -38,5 +57,10 @@ export class SidebarComponent implements OnInit {
         }
         return true;
     }
+    signOut(): void {
+        console.log('signout');
+        this.afAuth.auth.signOut();
+        this.router.navigate(['/'])
+      }
 
 }

@@ -1,22 +1,53 @@
 <div align="center">
-    
+
     <div class="col-md-6 col-md-offset-3">
-      <!-- <div class="col-md-5 col-md-offset-4"> -->
-      
+        <!-- <div class="col-md-5 col-md-offset-4"> -->
+
         <div *ngIf="afAuth.authState | async; let user; else showLogin">
             <h1>Hello {{ user.displayName }}!</h1>
             <button (click)="signOut()">Logout</button>
         </div>
         <ng-template #showLogin>
-          <img  src="assets/img/WA_logo_Black.png" alt="">
-          <h3>Sign Up</h3>
-          <input type="email" class="form-control" name="email" placeholder="email@address.com" [(ngModel)]="inputEmail" requred>
+            <!-- <h3>Sign Up</h3> -->
+            <!-- <input type="email" class="form-control" name="email" placeholder="email@address.com" [(ngModel)]="inputEmail" requred>
           <input type="password" class="form-control" name="password" placeholder="password" [(ngModel)]="inputPassword" required><br>
+          <input type="text" ref="name" class="form-control" name="fullName" placeholder="Full Name" v-model="user.name" v-validate data-vv-rules="required|min:3">
+          
           <button class="btn btn-secondary" (click)="backToLogin()">Back</button>
           <button class="btn btn-secondary" (click)="emailSignUp(inputEmail,inputPassword)">Confirm</button>
-        
-    
+         -->
+
+            <div class="sign-up" align="center">
+                <notifications></notifications>
+                <img src="assets/img/WA_logo_Black.png" alt="">
+                <hr>
+                <h3>Let's create a new account!</h3>
+                <form>
+                    <div class="form-group">
+                        <input type="text" ref="name" class="form-control" name="fullName" placeholder="Full Name" v-model="user.name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" ref="email" class="form-control" name="email" placeholder="Email" v-model="user.email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" ref="password" class="form-control" name="password" placeholder="Password" v-model="user.password1">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" ref="url" class="form-control" name="facebook url" placeholder="Facebook URL" v-model="user.url">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" ref="phone" class="form-control" name="phone" placeholder="Phone Number" v-model="user.phone">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" onfocus="(this.type='date')" ref="birthdate" class="form-control" name="birthdate" placeholder="Birth Date"
+                            v-model="user.birthdate">
+                    </div>
+                    <button class="btn btn-secondary" type="submit">Signup</button>
+                </form>
+                <h5>or go back to
+                    <a (click)="backToLogin()">login</a>.</h5>
+            </div>
+
         </ng-template>
-    
+
     </div>
-    
